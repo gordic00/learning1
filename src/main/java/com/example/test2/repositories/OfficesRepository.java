@@ -26,7 +26,7 @@ public interface OfficesRepository extends CrudRepository<Office,String> {
     @Query("SELECT o FROM Office o where o.id=?1")
     Office ofId(String id);
 
-
-
+    @Query("SELECT o.id, o.city, o.country, count(c.salesRepEmployeeNumber) as maximum FROM Office o, Customer c, Employee e where c.salesRepEmployeeNumber = e and e.office = o group by o.id order by maximum desc")
+    List<String> findOfficesWithMostCustomers();
 
 }

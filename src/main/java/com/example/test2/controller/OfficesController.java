@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "/office")
 public class OfficesController {
@@ -34,6 +36,7 @@ public class OfficesController {
     Iterable<String> getOfficesWithoutEmployee(){
         return officesRepository.findOfficeWithoutEmployees();
     }
+
     @GetMapping(path = "/office/{id}")
     public @ResponseBody Iterable<String> getEmployeesPerOffice(@PathVariable String id){
         return officesRepository.sumOfficeEmployeesById(id);
@@ -77,5 +80,11 @@ public class OfficesController {
         return "Deleted successfully";
     }
 
+    @GetMapping(path = "/mostCustomers")
+    public @ResponseBody
+    String getOfficesWithMostCustomers(){
+        List<String> lista = officesRepository.findOfficesWithMostCustomers();
+        return lista.get(0);
+    }
 
 }
