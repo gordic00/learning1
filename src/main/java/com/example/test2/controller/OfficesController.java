@@ -34,9 +34,9 @@ public class OfficesController {
     Iterable<String> getOfficesWithoutEmployee(){
         return officesRepository.findOfficeWithoutEmployees();
     }
-    @GetMapping(path = "/office/4")
-    public @ResponseBody Iterable<String> getEmployeesPerOffice(){
-        return officesRepository.sumOfficeEmployeesById("4");
+    @GetMapping(path = "/office/{id}")
+    public @ResponseBody Iterable<String> getEmployeesPerOffice(@PathVariable String id){
+        return officesRepository.sumOfficeEmployeesById(id);
     }
 
     @PostMapping("/add")
